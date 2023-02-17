@@ -109,6 +109,7 @@ pub enum Track {
     Zandvoort,
     Imola,
     Portimao,
+    Jeddah,
     Miami,
     Unknown,
 }
@@ -146,6 +147,7 @@ impl Track {
             Track::Imola => "Autodromo Internazionale Enzo e Dino Ferrari",
             Track::Portimao => "Autódromo Internacional do Algarve",
             Track::Miami => "Miami International Autodrome",
+            Track::Jeddah => "Jeddah Corniche Circuit",
             Track::Unknown => "[UNKNOWN]",
         }
     }

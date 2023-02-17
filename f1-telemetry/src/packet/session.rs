@@ -107,6 +107,9 @@ pub enum Track {
     SuzukaShort,
     Hanoi,
     Zandvoort,
+    Imola,
+    Portimao,
+    Miami,
     Unknown,
 }
 
@@ -140,6 +143,9 @@ impl Track {
             Track::SuzukaShort => "Suzuka International Racing Course (Short)",
             Track::Hanoi => "Hanoi Street Circuit",
             Track::Zandvoort => "Circuit Zandvoort",
+            Track::Imola => "Autodromo Internazionale Enzo e Dino Ferrari",
+            Track::Portimao => "Autódromo Internacional do Algarve",
+            Track::Miami => "Miami International Autodrome",
             Track::Unknown => "[UNKNOWN]",
         }
     }

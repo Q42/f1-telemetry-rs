@@ -159,6 +159,24 @@ pub enum Formula {
     F1Classic,
     F2,
     F1Generic,
+    Beta,
+    Supercars,
+    Esports,
+    F22021,
+}
+impl Formula {
+    pub fn name<'a>(self) -> &'a str {
+        match self {
+            Formula::F1Modern => "F1 Modern",
+            Formula::F1Classic => "F1 Classic",
+            Formula::F2 => "F2",
+            Formula::F1Generic => "F1 Generic",
+            Formula::Beta => "Beta",
+            Formula::Supercars => "Supercars",
+            Formula::Esports => "ESports",
+            Formula::F22021 => "F1 2021",
+        }
+    }
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize)]

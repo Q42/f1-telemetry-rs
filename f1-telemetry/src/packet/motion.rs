@@ -96,5 +96,36 @@ pub struct PacketMotionData {
     /// List of motion data
     pub motion_data: Vec<CarMotionData>,
     /// Extra data specific to the player's car
-    pub player_car_data: PlayerCarData,
+    pub player_car_data: Option<PlayerCarData>,
+}
+
+/// The motion Ex packet gives extended data for the car being driven with the goal
+/// of being able to drive a motion platform setup.
+///
+/// Frequency: Rate as specified in menus
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct PacketMotionExData {
+    // Packet Header
+    pub header: PacketHeader,
+    // Extra plyaer car only data
+    pub suspension_position: WheelData<f32>,
+    pub suspension_velocity: WheelData<f32>,
+    pub suspension_acceleration: WheelData<f32>,
+    pub wheel_speed: WheelData<f32>,
+    pub wheel_slip_ratio: WheelData<f32>,
+    pub wheel_slip_angle: WheelData<f32>,
+    pub wheel_lat_force: WheelData<f32>,
+    pub wheel_long_force: WheelData<f32>,
+    pub height_of_cog_above_ground: f32,
+    pub local_velocity_x: f32,
+    pub local_velocity_y: f32,
+    pub local_velocity_z: f32,
+    pub angular_velocity_x: f32,
+    pub angular_velocity_y: f32,
+    pub angular_velocity_z: f32,
+    pub angular_acceleration_x: f32,
+    pub angular_acceleration_y: f32,
+    pub angular_acceleration_z: f32,
+    pub front_wheels_angle: f32,
+    pub wheel_vert_force: WheelData<f32>,
 }

@@ -188,6 +188,12 @@ pub struct Buttons {
     pub button_status: u32,
 }
 
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize)]
+pub struct Overtake {
+    pub overtaking_vehicle_idx: u8,
+    pub being_overtaken_vehicle_idx: u8,
+}
+
 /// List of possible events
 ///
 /// The following packets were introduced in F1 2020:
@@ -238,6 +244,8 @@ pub enum Event {
     Flashback(Flashback),
     /// Button status changed
     Buttons(Buttons),
+    /// Overtake occured
+    Overtake(Overtake),
 }
 
 impl Event {
@@ -261,6 +269,7 @@ impl Event {
             Event::StopGoPenaltyServed(_) => "Stop and go penalty served",
             Event::Flashback(_) => "Flashback activated",
             Event::Buttons(_) => "Button status changed",
+            Event::Overtake(_) => "Overtake occured",
         }
     }
 
@@ -275,6 +284,7 @@ impl Event {
             Event::SpeedTrap(e) => Some(e.vehicle_idx),
             Event::DriveThroughPenaltyServed(e) => Some(e.vehicle_idx),
             Event::StopGoPenaltyServed(e) => Some(e.vehicle_idx),
+            Event::Overtake(e) => Some(e.being_overtaken_vehicle_idx),
             _ => None,
         }
     }

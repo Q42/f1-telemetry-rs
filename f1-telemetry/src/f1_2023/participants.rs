@@ -138,17 +138,14 @@ fn unpack_telemetry(value: u8) -> Result<Telemetry, UnpackError> {
     }
 }
 
-/// This is a list of participants in the race. If the vehicle is controlled by AI, then the name
-/// will be the driver name. If this is a multiplayer game, the names will be the Steam Id on PC, or
-/// the LAN name if appropriate.
+/// This is a list of participants in the race. If the vehicle is controlled by AI, then the name will be the driver name. If this is a multiplayer game, the names will be the Steam Id on PC, or the LAN name if appropriate.
 ///
-/// N.B. on Xbox One, the names will always be the driver name, on PS4 the name will be the LAN name
-/// if playing a LAN game, otherwise it will be the driver name.
+/// N.B. on Xbox One, the names will always be the driver name, on PS4 the name will be the LAN name if playing a LAN game, otherwise it will be the driver name. 
 ///
 /// The array should be indexed by vehicle index.
 ///
 /// Frequency: Every 5 seconds
-/// Size: 1257 bytes
+/// Size: 1306 bytes
 /// Version: 1
 ///
 /// ## Specification
@@ -166,16 +163,19 @@ struct RawParticipantData {
 
 /// ## Specification
 /// ```text
-/// ai_controlled:  Whether the vehicle is AI (1) or Human (0) controlled
-/// driver_id:      Driver id - see appendix
-/// network_id:     Network id – unique identifier for network players
-/// team_id:        Team id - see appendix
-/// my_team:        My team flag – 1 = My Team, 0 = otherwise
-/// race_number:    Race number of the car
-/// nationality:    Nationality of the driver
-/// name:           Name of participant in UTF-8 format – null terminated
-///                 Will be truncated with … (U+2026) if too long
-/// your_telemetry: The player's UDP setting, 0 = restricted, 1 = public
+/// ai_controlled:     Whether the vehicle is AI (1) or Human (0) controlled
+/// driver_id:         Driver id - see appendix
+/// network_id:        Network id – unique identifier for network players
+/// team_id:           Team id - see appendix
+/// my_team:           My team flag – 1 = My Team, 0 = otherwise
+/// race_number:       Race number of the car
+/// nationality:       Nationality of the driver
+/// name:              Name of participant in UTF-8 format – null terminated
+///                    Will be truncated with … (U+2026) if too long
+/// your_telemetry:    The player's UDP setting, 0 = restricted, 1 = public
+/// show_online_names: The player's show online names setting, 0 = off, 1 = on
+/// platform:          1 = Steam, 3 = PlayStation, 4 = Xbox, 6 = Origin, 255 = unknown
+
 /// ```
 #[derive(Deserialize)]
 struct RawParticipant {
@@ -189,6 +189,9 @@ struct RawParticipant {
     name1: [u8; 32], // FIXME: Ugly hack
     name2: [u8; 16],
     telemetry: u8,
+    uint8      m_showOnlineNames;   // The player's show online names setting, 0 = off, 1 = on
+    uint8      m_platform;          // 1 = Steam, 3 = PlayStation, 4 = Xbox, 6 = Origin, 255 = unknown
+
 }
 
 impl TryFrom<&RawParticipant> for ParticipantData {

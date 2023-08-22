@@ -189,9 +189,8 @@ struct RawParticipant {
     name1: [u8; 32], // FIXME: Ugly hack
     name2: [u8; 16],
     telemetry: u8,
-    uint8      m_showOnlineNames;   // The player's show online names setting, 0 = off, 1 = on
-    uint8      m_platform;          // 1 = Steam, 3 = PlayStation, 4 = Xbox, 6 = Origin, 255 = unknown
-
+    show_online_names: u8, // The player's show online names setting, 0 = off, 1 = on
+    platform: u8, // 1 = Steam, 3 = PlayStation, 4 = Xbox, 6 = Origin, 255 = unknow
 }
 
 impl TryFrom<&RawParticipant> for ParticipantData {

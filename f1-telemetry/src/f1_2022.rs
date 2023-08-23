@@ -97,5 +97,9 @@ pub(crate) fn parse_packet(size: usize, packet: &[u8]) -> Result<Packet, UnpackE
 
             Ok(Packet::SessionHistory(packet))
         }
+        _ => Err(UnpackError(format!(
+            "Invalid packet type: {:?}",
+            header.packet_type
+        ))),
     }
 }

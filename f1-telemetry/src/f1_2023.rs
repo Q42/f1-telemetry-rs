@@ -16,6 +16,8 @@ use session_history::parse_session_history_data;
 
 use crate::packet::{Packet, PacketType, UnpackError};
 
+use self::{motion_ex::parse_motion_ex_data, tyre_sets::parse_tyre_sets_data};
+
 mod car_damage;
 mod car_setup;
 mod car_status;
@@ -28,9 +30,11 @@ mod header;
 mod lap;
 mod lobby_info;
 mod motion;
+mod motion_ex;
 mod participants;
 mod session;
 mod session_history;
+mod tyre_sets;
 
 pub(crate) fn parse_packet(size: usize, packet: &[u8]) -> Result<Packet, UnpackError> {
     let mut cursor = Cursor::new(packet);
@@ -97,9 +101,13 @@ pub(crate) fn parse_packet(size: usize, packet: &[u8]) -> Result<Packet, UnpackE
 
             Ok(Packet::SessionHistory(packet))
         }
-        _ => Err(UnpackError(format!(
-            "Invalid packet type: {:?}",
-            header.packet_type
-        ))),
+        PacketType::TyreSets => {
+            let packet = parse_tyre_sets_data(&mut cursor, header, size)?;
+            Ok(Packet::TyreSets(packet))
+        }
+        PacketType::MotionEx => {
+            let packet = parse_motion_ex_data(&mut cursor, header, size)?;
+            Ok(Packet::MotionEx(packet))
+        }
     }
 }

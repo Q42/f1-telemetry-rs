@@ -111,6 +111,8 @@ pub enum Track {
     Portimao,
     Jeddah,
     Miami,
+    LasVegas,
+    Losail,
     Unknown,
 }
 
@@ -148,6 +150,8 @@ impl Track {
             Track::Portimao => "Autódromo Internacional do Algarve",
             Track::Miami => "Miami International Autodrome",
             Track::Jeddah => "Jeddah Corniche Circuit",
+            Track::LasVegas => "Las Vegas Street Circuit",
+            Track::Losail => "Losail International Circuit",
             Track::Unknown => "[UNKNOWN]",
         }
     }

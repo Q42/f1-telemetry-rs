@@ -75,6 +75,8 @@ fn unpack_track(value: i8) -> Result<Track, UnpackError> {
         28 => Ok(Track::Portimao),
         29 => Ok(Track::Jeddah),
         30 => Ok(Track::Miami),
+        31 => Ok(Track::LasVegas),
+        32 => Ok(Track::Losail),
         -1 => Ok(Track::Unknown),
         _ => Err(UnpackError(format!("Invalid Track value: {}", value))),
     }
